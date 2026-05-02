@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Jobs</h2>
+<form method="post" class="form grid">
+  <select name="client_id" required>
+    <option value="">Select client</option>
+    {% for c in clients %}<option value="{{ c.id }}">{{ c.company_name }}</option>{% endfor %}
+  </select>
+  <input name="title" placeholder="Job title" required>
+  <input name="salary_min" type="number" step="0.01" placeholder="Salary min">
+  <input name="salary_max" type="number" step="0.01" placeholder="Salary max">
+  <select name="status"><option>Open</option><option>Closed</option><option>On Hold</option></select>
+  <button type="submit">Add Job</button>
+</form>
+<table>
+  <tr><th>ID</th><th>Client</th><th>Title</th><th>Salary Range</th><th>Status</th></tr>
+  {% for j in jobs %}
+  <tr><td>{{ j.id }}</td><td>{{ j.client.company_name }}</td><td>{{ j.title }}</td><td>{{ j.salary_min }} - {{ j.salary_max }}</td><td>{{ j.status }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}
