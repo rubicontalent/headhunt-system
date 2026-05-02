@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Clients</h2>
+<form method="post" class="form grid">
+  <input name="company_name" placeholder="Company name" required>
+  <input name="hr_contact" placeholder="HR contact">
+  <input name="fee_percentage" type="number" step="0.01" placeholder="Fee %">
+  <textarea name="contract_notes" placeholder="Contract notes"></textarea>
+  <button type="submit">Add Client</button>
+</form>
+<table>
+  <tr><th>ID</th><th>Company</th><th>HR Contact</th><th>Fee %</th><th>Notes</th></tr>
+  {% for c in clients %}
+  <tr><td>{{ c.id }}</td><td>{{ c.company_name }}</td><td>{{ c.hr_contact }}</td><td>{{ c.fee_percentage }}</td><td>{{ c.contract_notes }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

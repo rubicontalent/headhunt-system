@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>AI Candidate Matching</h2>
+<form method="post" class="form grid">
+  <select name="job_id" required>
+    <option value="">Select Job</option>
+    {% for j in jobs %}
+      <option value="{{ j.id }}" {% if selected_job and selected_job.id == j.id %}selected{% endif %}>{{ j.title }} ({{ j.client.company_name }})</option>
+    {% endfor %}
+  </select>
+  <textarea name="job_brief" placeholder="Optional: paste job brief for better matching" rows="4">{{ job_brief or '' }}</textarea>
+  <button type="submit">Run AI Match</button>
+</form>
+
+{% if matches %}
+<table>
+  <tr><th>Candidate</th><th>Industry</th><th>Job Function</th><th>Experience</th><th>AI Match Score</th><th>Reason</th></tr>
+  {% for m in matches %}
+  <tr>
+    <td>{{ m.candidate.name }}</td>
+    <td>{{ m.candidate.industry }}</td>
+    <td>{{ m.candidate.job_function }}</td>
+    <td>{{ m.candidate.experience or '' }}</td>
+    <td><span class="score">{{ m.score }}%</span></td>
+    <td>{{ m.reason }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

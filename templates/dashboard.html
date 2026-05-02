@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="cards">
+  <a class="card" href="{{ url_for('candidates') }}">Candidate 管理</a>
+  <a class="card" href="{{ url_for('clients') }}">Client 管理</a>
+  <a class="card" href="{{ url_for('jobs') }}">Job 管理</a>
+  <a class="card" href="{{ url_for('placements') }}">Placement Tracking</a>
+</div>
+{% endblock %}
