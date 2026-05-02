@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Candidate #{{ c.id }}</h2>
+<form method="post" class="form grid">
+  <input name="name" value="{{ c.name }}" placeholder="Name" required>
+  <input name="email" value="{{ c.email or '' }}" placeholder="Email">
+  <input name="phone" value="{{ c.phone or '' }}" placeholder="Phone">
+  <select name="industry">{% for i in industries %}<option value="{{ i }}" {% if i == c.industry %}selected{% endif %}>{{ i }}</option>{% endfor %}</select>
+  <select name="job_function">{% for j in job_functions %}<option value="{{ j }}" {% if j == c.job_function %}selected{% endif %}>{{ j }}</option>{% endfor %}</select>
+  <input name="experience" type="number" step="0.1" value="{{ c.experience if c.experience is not none else '' }}" placeholder="Years of experience">
+  <input name="salary" type="number" step="0.01" value="{{ c.salary if c.salary is not none else '' }}" placeholder="Salary">
+  <input name="date_of_birth" value="{{ c.date_of_birth or '' }}" placeholder="DOB">
+  <select name="status">{% for st in statuses %}<option value="{{ st }}" {% if st == c.status %}selected{% endif %}>{{ st }}</option>{% endfor %}</select>
+  <input name="source" value="{{ c.source or '' }}" placeholder="Source">
+  <textarea name="notes" placeholder="Notes" rows="4">{{ c.notes or '' }}</textarea>
+  <button type="submit">Save</button>
+</form>
+{% endblock %}
