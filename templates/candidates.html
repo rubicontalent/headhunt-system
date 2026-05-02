@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Candidates</h2>
+<form method="post" enctype="multipart/form-data" class="form">
+  <label>Upload CV (PDF/DOCX)</label>
+  <input type="file" name="cv_file" required>
+  <button type="submit">Upload + Parse</button>
+</form>
+<table>
+  <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Industry</th><th>Exp(yrs)</th><th>Salary</th><th>DOB</th><th>CV</th></tr>
+  {% for c in candidates %}
+  <tr>
+    <td>{{ c.id }}</td><td>{{ c.name }}</td><td>{{ c.email or '' }}</td><td>{{ c.phone or '' }}</td>
+    <td>{{ c.industry or '' }}</td><td>{{ c.experience or '' }}</td><td>{{ c.salary or '' }}</td><td>{{ c.date_of_birth or '' }}</td><td>{{ c.cv_filename }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
